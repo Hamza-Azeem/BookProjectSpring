@@ -1,7 +1,7 @@
 package com.example.BookProjectSpring.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Formula;
 
@@ -10,13 +10,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "authors")
-public class Author {
+public class Author extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "author")
     private List<Book> books = new ArrayList<>();
     @Formula(value = "(SELECT COUNT(*) FROM books book WHERE book.author_id=id)")
