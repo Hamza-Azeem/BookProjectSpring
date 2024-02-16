@@ -1,4 +1,4 @@
-package com.example.BookProjectSpring.entity;
+package com.example.BookProjectSpring.base;
 
 import jakarta.persistence.MappedSuperclass;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 public abstract class BaseEntity {
-
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+    private String statusCode;
 
 
     public LocalDateTime getCreatedAt() {
@@ -31,5 +31,13 @@ public abstract class BaseEntity {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
     }
 }

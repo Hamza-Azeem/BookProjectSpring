@@ -1,12 +1,11 @@
 package com.example.BookProjectSpring.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.example.BookProjectSpring.base.BaseEntity;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "books")
-public class Book extends BaseEntity{
+public class Book extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

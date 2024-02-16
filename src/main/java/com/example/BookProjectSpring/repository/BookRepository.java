@@ -1,5 +1,6 @@
 package com.example.BookProjectSpring.repository;
 
+import com.example.BookProjectSpring.base.BaseRepository;
 import com.example.BookProjectSpring.entity.Book;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BookRepository  extends JpaRepository<Book, Long> {
+public interface BookRepository  extends BaseRepository<Book, Long> {
     @Override
     @EntityGraph(attributePaths = {"author"})
     List<Book> findAll();
@@ -22,4 +23,7 @@ public interface BookRepository  extends JpaRepository<Book, Long> {
     @Transactional
     @Query("DELETE FROM Book WHERE author.id = :id")
     int deleteBooksByAuthor(long id);
+    @Query(value = "SELECT book FROM Book book WHERE book.author.id=:id")
+    @EntityGraph(attributePaths = {"author"})
+    List<Book> findAllBooksByAuthor(long id);
 }

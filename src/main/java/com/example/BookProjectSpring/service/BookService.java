@@ -1,6 +1,7 @@
 package com.example.BookProjectSpring.service;
 
 import com.example.BookProjectSpring.DTO.BookDto;
+import com.example.BookProjectSpring.base.BaseService;
 import com.example.BookProjectSpring.entity.Book;
 import com.example.BookProjectSpring.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +10,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BookService {
+public class BookService extends BaseService<Book, Long> {
     private final BookRepository bookRepository;
 
     @Autowired
     public BookService(BookRepository bookRepository) {
+        super();
         this.bookRepository = bookRepository;
     }
     public BookDto findBookById(long id){
-        BookDto bookDto = new BookDto(bookRepository.findById(id).get());
+        BookDto bookDto = new BookDto(findObjectById(id));
         return bookDto;
     }
     public Book findBookAndItsAuthor(long id){
@@ -26,16 +28,15 @@ public class BookService {
     public int deleteAllBooksByAuthor(long id){
         return bookRepository.deleteBooksByAuthor(id);
     }
-    public List<Book> findAllBooks(){
-        return bookRepository.findAll();
+    @Override
+    public Book updateObject(Book object) {
+        Book book = findObjectById(object.getId());
+        book.setTitle(object.getTitle());
+        book.setPrice(object.getPrice());
+        book.setStatusCode("updated");
+        return super.updateObject(book);
     }
-    public Book insertBook(Book book){
-        return bookRepository.save(book);
-    }
-    public Book updateBook(Book book){
-        return bookRepository.save(book);
-    }
-    public void deleteBook(long id){
-        bookRepository.deleteById(id);
+    public List<Book> findAllBooksByAuthor(long id){
+        return bookRepository.findAllBooksByAuthor(id);
     }
 }

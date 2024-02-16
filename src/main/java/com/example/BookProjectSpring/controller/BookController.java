@@ -28,22 +28,26 @@ public class BookController {
     }
     @GetMapping()
     public List<Book> findAllBooks(){
-        return bookService.findAllBooks();
+        return bookService.findAllObjects();
     }
     @PostMapping("")
     public Book insertBook(@RequestBody Book book){
-        return bookService.insertBook(book);
+        return bookService.insertObejct(book);
     }
     @PutMapping("")
     public Book updateBook(@RequestBody Book book){
-        return bookService.updateBook(book);
+        return bookService.updateObject(book);
     }
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable("id") long id){
-        bookService.deleteBook(id);
+        bookService.deleteObject(id);
     }
     @DeleteMapping("/author/{id}")
     public int deleteAllBooksByAuthor(@PathVariable long id){
         return bookService.deleteAllBooksByAuthor(id);
+    }
+    @GetMapping("/author/all/{id}")
+    public ResponseEntity<?> findAllBooksByAuthor(@PathVariable("id") long id){
+        return ResponseEntity.ok(bookService.findAllBooksByAuthor(id));
     }
 }

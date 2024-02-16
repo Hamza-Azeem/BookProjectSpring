@@ -1,6 +1,7 @@
 package com.example.BookProjectSpring.entity;
 
 
+import com.example.BookProjectSpring.base.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Formula;
