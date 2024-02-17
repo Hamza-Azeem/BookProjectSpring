@@ -4,6 +4,7 @@ package com.example.BookProjectSpring.entity;
 import com.example.BookProjectSpring.base.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.Formula;
 
 import java.util.ArrayList;
@@ -15,7 +16,9 @@ public class Author extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Invalid name")
     private String firstName;
+    @NotBlank(message = "Invalid name")
     private String lastName;
     @JsonIgnore
     @OneToMany(mappedBy = "author")

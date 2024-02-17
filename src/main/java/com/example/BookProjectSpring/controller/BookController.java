@@ -2,6 +2,7 @@ package com.example.BookProjectSpring.controller;
 
 import com.example.BookProjectSpring.entity.Book;
 import com.example.BookProjectSpring.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +32,11 @@ public class BookController {
         return bookService.findAllObjects();
     }
     @PostMapping("")
-    public Book insertBook(@RequestBody Book book){
+    public Book insertBook(@RequestBody @Valid Book book){
         return bookService.insertObejct(book);
     }
     @PutMapping("")
-    public Book updateBook(@RequestBody Book book){
+    public Book updateBook(@RequestBody @Valid Book book){
         return bookService.updateObject(book);
     }
     @DeleteMapping("/{id}")
