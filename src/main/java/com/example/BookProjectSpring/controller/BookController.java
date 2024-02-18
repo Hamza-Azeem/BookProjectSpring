@@ -2,6 +2,8 @@ package com.example.BookProjectSpring.controller;
 
 import com.example.BookProjectSpring.entity.Book;
 import com.example.BookProjectSpring.service.BookService;
+import com.example.BookProjectSpring.specification.BookSearch;
+import com.example.BookProjectSpring.specification.BookSpecification;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,5 +52,9 @@ public class BookController {
     @GetMapping("/author/all/{id}")
     public ResponseEntity<?> findAllBooksByAuthor(@PathVariable("id") long id){
         return ResponseEntity.ok(bookService.findAllBooksByAuthor(id));
+    }
+    @PostMapping("/search")
+    public List<Book> bookSearch(@RequestBody BookSearch bookSearch){
+        return bookService.searchBookBySpecification(bookSearch);
     }
 }

@@ -4,6 +4,8 @@ import com.example.BookProjectSpring.DTO.BookDto;
 import com.example.BookProjectSpring.base.BaseService;
 import com.example.BookProjectSpring.entity.Book;
 import com.example.BookProjectSpring.repository.BookRepository;
+import com.example.BookProjectSpring.specification.BookSearch;
+import com.example.BookProjectSpring.specification.BookSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +40,9 @@ public class BookService extends BaseService<Book, Long> {
     }
     public List<Book> findAllBooksByAuthor(long id){
         return bookRepository.findAllBooksByAuthor(id);
+    }
+    public List<Book> searchBookBySpecification(BookSearch search){
+        BookSpecification specification = new BookSpecification(search);
+        return bookRepository.findAll(specification);
     }
 }
